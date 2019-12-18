@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+
+  build:
+    commands:
+      - dotnet restore testService/service/service.csproj
+      - dotnet build testService/service/service.csproj
+      - dotnet publish testService/service/service.csproj -o ./staging/app
+      - cp ./testService/service/aws-windows-deployment-manifest.json ./testService/service/staging/.
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'testService/service/staging'
